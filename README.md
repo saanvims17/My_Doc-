@@ -33,6 +33,7 @@ PDF → Partition → Chunk → Summarize → Embed → Store → Retrieve → A
 ### Project Structure
 
 .
+
 ├── mydoc_rag_pipeline.py      # Core RAG pipeline (partition → chunk → embed → retrieve → answer)
 
 ├── app.py             # Streamlit chat interface
