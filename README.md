@@ -33,13 +33,13 @@ PDF → Partition → Chunk → Summarize → Embed → Store → Retrieve → A
 ### Project Structure
 
 .
-  ├── mydoc_rag_pipeline.py      # Core RAG pipeline (partition → chunk → embed → retrieve → answer)
+    ├── mydoc_rag_pipeline.py      # Core RAG pipeline (partition → chunk → embed → retrieve → answer)
 
-  ├── app.py             # Streamlit chat interface
+    ├── app.py             # Streamlit chat interface
 
-  └── README.md
+    └── README.md
 
-  └── .env 
+    └── .env 
 
   --- 
   ### Requirements - 
@@ -81,6 +81,7 @@ Create a .env file in the project root:
 OPENAI_API_KEY=sk-...
 
 --- 
+
 ### Quickstart - Run the Streamlit app
 
 streamlit run app.py
