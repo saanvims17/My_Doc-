@@ -104,7 +104,7 @@ Each chunk is analyzed and split into:
 
 ---
 
-#### Installations** 
+#### Installations
 
 pip install \
 
@@ -122,7 +122,7 @@ python-dotenv
 
 --- 
 
-#### system dependencies
+#### System dependencies
 
 **1. Poppler (`poppler-utils`)**
    
