@@ -30,17 +30,19 @@ PDF → Partition → Chunk → Summarize → Embed → Store → Retrieve → A
 
 - Source transparency — every answer exposes the source chunks it was grounded in, tagged by type (text / table / image)
 
+--- 
+
 ### Project Structure
 
 .
 
-├── mydoc_rag_pipeline.py      # Core RAG pipeline (partition → chunk → embed → retrieve → answer)
+  ├── mydoc_rag_pipeline.py      # Core RAG pipeline (partition → chunk → embed → retrieve → answer)
 
-├── app.py             # Streamlit chat interface
+  ├── app.py             # Streamlit chat interface
 
-└── README.md
+  └── README.md
 
-└── .env 
+  └── .env 
 
   --- 
   ### Requirements - 
