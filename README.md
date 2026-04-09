@@ -11,10 +11,6 @@ PDF → Partition → Chunk → Summarize → Embed → Store → Retrieve → A
 
 <img width="595" height="494" alt="Screenshot 2026-04-09 at 7 15 50 AM" src="https://github.com/user-attachments/assets/aae0e928-0024-4e11-b9ef-94af70ca3f51" />
 
-PDF parsing using Unstructured.io
-
-**Extracts:**
-
 <img width="1246" height="472" alt="Screenshot 2026-04-09 at 7 36 49 PM" src="https://github.com/user-attachments/assets/f4186437-4212-440c-957e-df2ca6cbb3f4" />
 
 
