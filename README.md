@@ -90,7 +90,7 @@ Each chunk is analyzed and split into:
 
 ---
 
-**Tech Stack**
+#### Tech Stack
 
 - LangChain
   
@@ -102,7 +102,9 @@ Each chunk is analyzed and split into:
   
 - Python
 
-**Installations** 
+---
+
+#### Installations** 
 
 pip install \
 
@@ -118,7 +120,9 @@ langchain-chroma \
 
 python-dotenv 
 
-**system dependencies** 
+--- 
+
+#### system dependencies
 
 **1. Poppler (`poppler-utils`)**
    
@@ -143,10 +147,11 @@ python-dotenv
 
 **for Linux**: apt-get install poppler-utils tesseract-ocr libmagic-dev
 
+--- 
+
 **RUN the notebook**
 
 python my_doc.ipynb 
 
-**Key Features** 
 
 
