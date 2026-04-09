@@ -1,6 +1,6 @@
 # My_Doc - Multimodal RAG for Intelligent Document QA 
 Transform any PDF into a searchable, explainable AI-powered knowledge system. 
-MyDOC is an end-to-end Multimodal Retrieval-Augmented Generation (RAG) pipeline that processes documents containing text, tables, and images, enabling accurate, grounded question answering with built-in evaluation.
+MyDOC is an end-to-end Multimodal Retrieval-Augmented Generation (RAG) pipeline that processes documents containing text, tables, and images, enabling accurate, grounded question answering. Powered by GPT-4o and ChromaDB, with full support for text, tables, and embedded images.
 
 **Pipeline Architecture** 
 PDF → Partition → Chunk → Summarize → Embed → Store → Retrieve → Answer → Evaluate
@@ -14,151 +14,91 @@ PDF → Partition → Chunk → Summarize → Embed → Store → Retrieve → A
 <img width="1246" height="472" alt="Screenshot 2026-04-09 at 7 36 49 PM" src="https://github.com/user-attachments/assets/f4186437-4212-440c-957e-df2ca6cbb3f4" />
 
 
-### 1. PDF Partitioning
-- Uses **Unstructured.io**
-- Extracts:
-  - Text blocks
-  - Tables (structured HTML)
-  - Images (base64 encoded)
+### Features
 
----
+- Multimodal extraction — pulls text, HTML tables, and base64-encoded images from PDFs using Unstructured's high-resolution strategy
 
-### 2. Intelligent Chunking
-- Title-based chunking strategy
-- Maintains semantic grouping
-- Configurable chunk size limits
+- Smart chunking — title-aware chunking keeps semantically related content together
 
----
+- AI-enhanced summaries — GPT-4o writes searchable descriptions for chunks containing tables or images; raw text is always preserved for faithful answer generation
 
-### 3. Content Separation
-Each chunk is analyzed and split into:
-- Text
-- Tables
-- Images
+- Dual-index design — embeddings are built from AI summaries (richer retrieval signal); the LLM answers from original raw text (no information loss)
 
----
+- MMR retrieval — Maximal Marginal Relevance prevents duplicate chunks from dominating results
 
-### 4. AI-Enhanced Summarization
-- Applied only when tables/images exist
-- Uses **GPT-4o**
-- Produces searchable descriptions for better retrieval
+- Chat UI — a clean, persistent conversation interface built with Streamlit
 
----
+- Source transparency — every answer exposes the source chunks it was grounded in, tagged by type (text / table / image)
 
-### 5. Vector Store (ChromaDB)
-- Embeddings: `text-embedding-3-small`
-- Stored in **Chroma vector database**
+### Project Structure
 
----
+.
+  ├── mydoc_rag_pipeline.py      # Core RAG pipeline (partition → chunk → embed → retrieve → answer)
 
-### 6. Retrieval
-- Top-k semantic retrieval
-- Uses LangChain retriever interface
+  ├── app.py             # Streamlit chat interface
 
----
+  └── README.md
 
-### 7. Answer Generation
-- Uses **GPT-4o**
-- Receives:
-  - Raw text
-  - Tables (HTML)
-  - Images (base64)
+  └── .env 
 
-✔ Strict grounding:
-- Answers only from retrieved context  
-- Explicitly states if information is missing  
+  --- 
+  ### Requirements - 
+Python packages 
 
----
+unstructured[pdf]
 
-### 8. Evaluation (LLM-as-a-Judge)
+langchain-core
 
-#### Retrieval Evaluation
-- Contains answer
-- Relevance score
-- Coverage score
-- Noise score
+langchain-openai
 
-#### Answer Evaluation
-- Faithfulness
-- Correctness
-- Completeness
-- Hallucination detection
+langchain-chroma
 
----
+openai
 
-#### Tech Stack
+streamlit
 
-- LangChain
-  
-- ChromaDB (Vector Store)
-  
-- OpenAI GPT-4o
-  
-- Unstructured.io (PDF parsing)
-  
-- Python
+python-dotenv
 
----
+### Install everything 
 
-#### Installations
+pip install "unstructured[pdf]" langchain-core langchain-openai langchain-chroma openai streamlit python-dotenv
 
-pip install \
+--- 
+###  System-level dependencies
+# macOS
+brew install poppler tesseract
 
-unstructured[all-docs] \
-
-langchain \
-
-langchain-community \
-
-langchain-openai \
-
-langchain-chroma \
-
-python-dotenv 
+# Ubuntu / Debian
+apt-get install -y poppler-utils tesseract-ocr
 
 --- 
 
-#### System dependencies
+### Environment variables
 
-**1. Poppler (`poppler-utils`)**
-   
-- Enables PDF parsing and layout extraction
-  
-- Required for high-resolution document processing  
+Create a .env file in the project root:
 
-**2. Tesseract (`tesseract-ocr`)**
-   
-- Performs OCR (Optical Character Recognition)
-  
-- Extracts text from scanned documents and images  
+OPENAI_API_KEY=sk-...
 
-**3. libmagic**
-   
-- Detects file types based on content
-   
-- Ensures correct parsing strategy  
+--- 
+### Quickstart - Run the Streamlit app
 
+streamlit run app.py
 
-**for Mac**: brew install poppler tesseract libmagic
+Open http://localhost:8501 in your browser, then:
 
-**for Linux**: apt-get install poppler-utils tesseract-ocr libmagic-dev
+- Upload a PDF in the sidebar
+
+- Click Process Document
+
+- Watch the live log as the pipeline runs — elements extracted, chunks created, embeddings built
+
+- Ask questions in the chat input at the bottom of the page
 
 --- 
 
-**RUN the notebook**
+### Run the pipeline from the terminal
 
-python my_doc.ipynb 
+python my_doc_rag.py
 
-**QUERY** 
-
-<img width="440" height="76" alt="Screenshot 2026-04-09 at 7 55 28 PM" src="https://github.com/user-attachments/assets/95717827-b7ac-4af7-b948-1425a985ee83" />
-
-**Answer** 
-
-<img width="853" height="624" alt="Screenshot 2026-04-09 at 7 55 59 PM" src="https://github.com/user-attachments/assets/dc6a6687-1039-4f95-a55e-9a082aed491d" />
-
-<img width="1140" height="145" alt="Screenshot 2026-04-09 at 7 56 32 PM" src="https://github.com/user-attachments/assets/2ff1fd4b-4d29-45fe-8759-6f588e02f08c" />
-
-#### DOWNLOAD THE my_doc_DEMO.pdf in this repo to see the whole output 
-
+--- 
 
