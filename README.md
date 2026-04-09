@@ -106,13 +106,13 @@ python my_doc_rag.py
 
 ### Module Reference — my_doc_rag.py
 
-# partition_document(file_path)
+**partition_document(file_path)**
 
 - Extracts all elements from a PDF using Unstructured's hi_res strategy. Infers table structure and extracts image blocks as base64 payloads.
   
 - Returns a list of Unstructured elements.
 
-### create_chunks_by_title(elements)
+**create_chunks_by_title(elements)**
 
 - Groups elements into chunks using title boundaries.
 
@@ -126,19 +126,19 @@ combine_text_under_n_chars	500
 
 Returns a list of chunks.
 
-### separate_content_types(chunk)
+**separate_content_types(chunk)**
 
 Inspects a chunk's orig_elements and splits content into text, tables (HTML strings), and images (base64 strings).
 
 Returns a dict with keys text, tables, images, and types.
 
-### create_ai_enhanced_summary(text, tables, images)
+**create_ai_enhanced_summary(text, tables, images)**
 
 Calls GPT-4o to generate a searchable description from a chunk's text and tables. The system prompt instructs the model to preserve all numbers, percentages, model dimensions, and named values exactly as they appear in the source.
 
 Returns a summary string. Falls back to text[:300] on API error.
 
-### summarise_chunks(chunks)
+**summarise_chunks(chunks)**
 
 - Iterates over chunks, calls create_ai_enhanced_summary() for chunks that contain tables or images, and builds LangChain Document objects.
 
@@ -148,7 +148,7 @@ Returns a summary string. Falls back to text[:300] on API error.
 
 - Returns a list of langchain_core.documents.Document.
 
-### create_vector_store(documents)
+**create_vector_store(documents)**
 
 - Embeds documents using text-embedding-3-small and stores them in an in-memory ChromaDB instance.
 
@@ -160,15 +160,17 @@ Returns a summary string. Falls back to text[:300] on API error.
 
 - Returns a list of Document objects.
 
-### generate_final_answer(chunks, query)
+**generate_final_answer(chunks, query)**
 
 Assembles context by reading raw_text from each chunk's metadata (falling back to page_content). Passes the context and query to GPT-4o with a strict instruction to answer only from the provided context.
 
 Returns an answer string.
 
-### run_complete_ingestion_pipeline(pdf_path)
+**run_complete_ingestion_pipeline(pdf_path)**
 
 Convenience wrapper that chains partition_document → create_chunks_by_title → summarise_chunks → create_vector_store and returns a ready-to-query vectorstore. Used by the terminal interface in __main__.
+
+-- 
 
 ### Known Limitations 
 
